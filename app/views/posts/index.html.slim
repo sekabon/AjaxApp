@@ -1,0 +1,18 @@
+h1
+  | FirstAPP
+= form_with url:  "/posts", method: :post,id: "form" do |form|
+  = form.text_field :content , id: "content"
+  = form.submit '投稿する' , id: "submit"
+#list
+
+- @posts.each do |post|
+  |  <div class="post" data-id=
+  = post.id
+  |  data-check=
+  = post.checked
+  | > 
+  .post-date
+    |  投稿日時：
+    = post.created_at
+  .post-content
+    = post.content

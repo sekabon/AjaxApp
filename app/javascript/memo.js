@@ -7,6 +7,11 @@ function memo() {
     XHR.responseType = "json";
     XHR.send(formData);
     XHR.onload = () => {
+      if (XHR.status != 200) {
+        alert(`Error ${XHR.status}: ${XHR.statusText}`);
+        return null;
+      }
+
       const item = XHR.response.post;
       const list = document.getElementById("list");
       const formText = document.getElementById("content");
@@ -20,20 +25,9 @@ function memo() {
           </div>
         </div>`;
       list.insertAdjacentHTML("afterend", HTML);
-
       formText.value = "";
-
-      if (XHR.status != 200) {
-        alert(`Error ${XHR.status}: ${XHR.statusText}`);
-      } else {
-        return null;
-      }
     };
-
-    XHR.onerror = function () {
-      alert("Request failed");
-    };
-
+    
     e.preventDefault();
   })
 }
